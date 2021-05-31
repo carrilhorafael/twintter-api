@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+    ## Relações
+    has_many :posts
 
     ## Validações
     validates :name, :email, :birthdate, :gender, :contact_phone, :nickname, presence: true
