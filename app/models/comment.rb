@@ -1,6 +1,8 @@
 class Comment < ApplicationRecord
   belongs_to :post
   belongs_to :user
+  has_many :replies, class_name: "Comment", foreign_key: "parent_comment_id"
+  belongs_to :parent_comment, class_name: "Comment", optional: true
 
   validates :content_text, presence: true, length: {maximum: 256}
   validate :anti_spam
