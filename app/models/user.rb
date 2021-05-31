@@ -1,6 +1,9 @@
 class User < ApplicationRecord
     ## Relações
     has_many :posts
+    has_many :like_posts
+    has_many :comments
+    # has_many :liked_posts, class_name:"Post", through: :like_posts
 
     ## Validações
     validates :name, :email, :birthdate, :gender, :contact_phone, :nickname, presence: true
