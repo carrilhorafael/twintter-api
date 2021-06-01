@@ -32,6 +32,16 @@ class UsersController < ApplicationController
     @user.destroy
   end
 
+  def follow
+    @follow = Follow.new(follow_params)
+
+    if @follow.save
+      render json: @follow, status: 201
+    else
+      render json: @follow.errors, status: 422
+    end
+  end
+
   def set_user
     @user = User.find(params[:id])
   end
@@ -43,5 +53,12 @@ class UsersController < ApplicationController
       :gender, 
       :contact_phone, 
       :nickname)
+  end
+
+  def follow_params
+    params.require(:follow).permit(
+      :followed_id,
+      :follower_id
+    )
   end
 end
