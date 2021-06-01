@@ -4,7 +4,9 @@ class User < ApplicationRecord
     has_many :like_posts
     has_many :comments
     # has_many :liked_posts, class_name:"Post", through: :like_posts
-
+    has_and_belongs_to_many :followers, join_table: "follows", foreign_key: "followed_id", class_name: "User", association_foreign_key: "follower_id"
+    has_and_belongs_to_many :followeds, join_table: "follows", foreign_key: "follower_id", class_name: "User", association_foreign_key: "followed_id"
+    
     ## Validações
     validates :name, :email, :birthdate, :gender, :contact_phone, :nickname, presence: true
     validates :nickname, :email, uniqueness: true
