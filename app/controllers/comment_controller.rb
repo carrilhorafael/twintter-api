@@ -29,6 +29,17 @@ class CommentController < ApplicationController
   end
 
   def destroy
+    @comment.destroy
+  end
+
+  def create_like
+    @likecomment = LikeComment.new(like_params)
+
+    if @likecomment.save
+      render json: @likecomment, status: 201
+    else
+      render json: @likecomment.errors, status: 422
+    end
   end
 
   def set_comment
@@ -42,4 +53,12 @@ class CommentController < ApplicationController
       :parent_coment_id
     )
   end
+
+  def like_params
+    params.require(:like).require(
+      :comment_id,
+      :user_id
+    )
+  end
+
 end

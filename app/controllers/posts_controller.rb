@@ -28,6 +28,16 @@ class PostsController < ApplicationController
     end
   end
 
+  def create_like
+    @likepost = LikePost.new(like_params)
+
+    if @likepost.save
+      render json: @likepost, status: 201
+    else
+      render json: @likepost.errors, status: 422
+    end
+  end
+
   def destroy
     @post.destroy
   end
@@ -39,6 +49,13 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(
       :content_text,
+      :user_id
+    )
+  end
+
+  def like_params
+    params.require(:like).permit(
+      :post_id,
       :user_id
     )
   end
