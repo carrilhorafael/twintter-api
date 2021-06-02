@@ -21,6 +21,7 @@ class User < ApplicationRecord
         "Mulher":0,
         "Homem":1
     }
+    before_create :generate_validation_token
 
     # funções
     def age
@@ -41,6 +42,27 @@ class User < ApplicationRecord
             t.destroy
         end
     end
+
+    def generate_validation_token
+        validate_token = generate_random_token
+        validate_token_expiry_at = Time.now + 2.minutes
+    end
+
+    
+    def validate_user?(token)
+        if validate_token_expiry_at > Time.now
+            self.is_valid = true
+            self.validate_token = nil
+            return true if self.save
+        else
+            return false
+        end
+    end
+
+    private
+        def generate_random_token
+            SecureRandom.alphanumeric(15)
+        end
 
 
 end
