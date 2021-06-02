@@ -4,6 +4,10 @@ class JsonWebToken
         JWT.encode(payload, Secret)    
     end
     def self.decode(token)
-        JWT.decode(token, Secret)    
+        begin
+            JWT.decode(token, Secret)    
+        rescue => exception
+            return nil
+        end
     end
 end

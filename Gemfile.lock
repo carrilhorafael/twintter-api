@@ -70,6 +70,7 @@ GEM
       msgpack (~> 1.0)
     builder (3.2.4)
     byebug (11.1.3)
+    cancancan (3.2.1)
     case_transform (0.2)
       activesupport
     concurrent-ruby (1.1.8)
@@ -163,6 +164,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.4)
   byebug
+  cancancan
   faker
   jwt
   listen (~> 3.3)

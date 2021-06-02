@@ -18,6 +18,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'faker'
 gem 'active_model_serializers'
 gem 'jwt'
+gem 'cancancan'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

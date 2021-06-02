@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :update, :destroy]
-  
+  load_and_authorize_resource
+
   def create
     @post = Post.new(post_params)
     if @post.save
