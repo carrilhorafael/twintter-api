@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  post 'comment/add_like', to: "comments#create_like"
-  post 'comment', to: "comments#create"
-  get 'comment/:id', to: "comments#show"
-  get 'comment', to: "comments#index"
-  put 'comment/:id', to: "comments#update"
-  delete 'comment/:id', to: "comments#destroy"
+  post 'comment/add_like', to: "comment#create_like"
+  post 'comment', to: "comment#create"
+  get 'comment/:id', to: "comment#show"
+  get 'comment', to: "comment#index"
+  put 'comment/:id', to: "comment#update"
+  delete 'comment/:id', to: "comment#destroy"
   
   
   post 'posts/add_like', to: "posts#create_like"
@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   put 'posts/:id', to: "posts#update"
   delete 'posts/:id', to: "posts#destroy"
   
-  
+  post 'users/follow', to: "users#follow"
   post 'users', to: "users#create"
   get 'users/:id', to: "users#show"
   get 'users', to: "users#index"

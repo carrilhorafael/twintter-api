@@ -50,6 +50,7 @@ class CommentController < ApplicationController
     params.require(:comment).permit(
       :content_text,
       :user_id,
+      :post_id,
       :parent_coment_id
     )
   end

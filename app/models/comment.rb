@@ -8,7 +8,7 @@ class Comment < ApplicationRecord
   validate :anti_spam
 
   def anti_spam
-    if Comment.where(content_text: content_text, user_id: user.id).length > 3
+    if Comment.where(content_text: content_text, user_id: user_id).length > 3
       errors.add(:spam, "Você comentou isso antes")
     end
   end
