@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+    has_secure_password
+    
     ## Relações
     has_many :posts, dependent: :destroy
     has_many :like_posts, dependent: :destroy
@@ -8,9 +10,11 @@ class User < ApplicationRecord
     has_and_belongs_to_many :followers, join_table: "follows", foreign_key: "followed_id", class_name: "User", association_foreign_key: "follower_id"
     has_and_belongs_to_many :followeds, join_table: "follows", foreign_key: "follower_id", class_name: "User", association_foreign_key: "followed_id"
 
+
     ## Validações
     validates :name, :email, :birthdate, :gender, :contact_phone, :nickname, presence: true
     validates :nickname, :email, uniqueness: true
+    validates :password, :password_confirmation, length: {minimum: 6}
     validates :contact_phone, length: {is: 11}, numericality: {only_integer: true}
     validate :under_age?
     enum gender:{

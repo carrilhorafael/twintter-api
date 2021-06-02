@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  post 'auth/login'
+  post 'auth/signup'
+
+
   post 'comment/add_like', to: "comment#create_like"
   post 'comment', to: "comment#create"
   get 'comment/:id', to: "comment#show"
