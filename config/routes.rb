@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   post 'auth/login'
   post 'auth/signup'
+  post 'auth/confirm'
+  post 'auth/repeat_token'
+  post 'auth/forgot'
+  post 'auth/reset_password'
 
 
   post 'comment/add_like', to: "comment#create_like"

@@ -10,6 +10,11 @@ class UserMailer < ApplicationMailer
 
     mail(to: @user.email, subject:"Confirmação de conta")
   end
+  def repeat_token
+    @user = params[:user]
+
+    mail(to: @user.email, subject:"Confirmação de conta")
+  end
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
@@ -17,8 +22,8 @@ class UserMailer < ApplicationMailer
   #   en.user_mailer.forgot.subject
   #
   def forgot
-    @greeting = "Hi"
+    @user = params[:user]
 
-    mail to: "to@example.org"
+    mail(to: @user.email, subject:"Esqueci minha senha")
   end
 end

@@ -8,8 +8,8 @@ Rails.application.configure do
     domain: "mail.google.com",
     authentication: "plain",
     enable_starttls_auto: true,
-    user_name: "email@email.com",
-    password: "senhadoemail"
+    user_name: "testemailer2021@gmail.com",
+    password: "Treinamento@2021"
   }
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   ActionMailer::Base.raise_delivery_errors = true

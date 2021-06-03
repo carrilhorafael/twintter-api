@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require "faker"
 10.times.each do
-    @user = User.create(name: Faker::Name.name, email: Faker::Internet.email, password: "123456", password_confirmation: "123456" contact_phone:"21998111889", gender: rand(0..1), nickname: Faker::Name.first_name, birthdate: "01/01/2000")
+    @user = User.create(name: Faker::Name.name, email: Faker::Internet.email, password: "123456", password_confirmation: "123456", contact_phone:"21998111889", gender: rand(0..1), nickname: Faker::Name.first_name, birthdate: "01/01/2000")
 end
 15.times.each do
     Post.create(content_text: Faker::Lorem.paragraph_by_chars(number: 256, supplemental: false), user_id:rand(1..10))

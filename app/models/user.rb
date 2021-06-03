@@ -15,14 +15,19 @@ class User < ApplicationRecord
     ## Validações
     validates :name, :email, :birthdate, :gender, :contact_phone, :nickname, presence: true
     validates :nickname, :email, uniqueness: true
-    validates :password, :password_confirmation, length: {minimum: 6}, on: :create
+    validates :password, :password_confirmation, length: {minimum: 6}, if: :password
     validates :contact_phone, length: {is: 11}, numericality: {only_integer: true}
     validate :under_age?
     enum gender:{
         "Mulher":0,
         "Homem":1
     }
-    before_create :generate_validation_token
+    enum role:{
+        "not_valid":0,
+        "standard":1,
+        "admin":2
+
+    }
 
     # funções
     def age
@@ -45,20 +50,28 @@ class User < ApplicationRecord
     end
 
     def generate_validation_token
-        validate_token = generate_random_token
-        validate_token_expiry_at = Time.now + 2.minutes
+        self.validate_token = generate_random_token
+        self.validate_token_expiry_at = Time.now + 2.minutes
+        self.save
     end
 
     
     def validate_user?(token)
         if validate_token_expiry_at > Time.now
-            self.is_valid = true
+            self.role = 1
             self.validate_token = nil
             return true if self.save
         else
             return false
         end
     end
+    def reset_password_complete?(password, password_confirmation)
+        self.password = password
+        self.password_confirmation = password_confirmation
+        self.validate_token = nil
+        return true if self.save
+    end
+
 
     private
         def generate_random_token
