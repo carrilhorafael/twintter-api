@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_02_190913) do
+ActiveRecord::Schema.define(version: 2021_06_03_131448) do
 
   create_table "comments", force: :cascade do |t|
     t.string "content_text"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 2021_06_02_190913) do
     t.string "validate_token"
     t.datetime "validate_token_expiry_at"
     t.boolean "is_valid", default: false
+    t.string "image"
   end
 
   add_foreign_key "comments", "comments", column: "parent_comment_id"

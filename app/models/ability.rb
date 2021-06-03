@@ -13,6 +13,7 @@ class Ability
         can [:read, :create_like], Comment
         can [:update, :destroy, :create], Comment, user_id: user.id
         can :manage, user
+        can :add_photo, User
       else
         can :read, Post
       end

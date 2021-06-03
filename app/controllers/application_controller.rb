@@ -3,6 +3,7 @@ class ApplicationController < ActionController::API
         render json: {error: "Acesso negado, parça"}, status: 403
     end
     def current_user
+        
         if decoded.present?
             User.find(decoded["user_id"])
         else

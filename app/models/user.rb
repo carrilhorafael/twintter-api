@@ -1,6 +1,7 @@
 class User < ApplicationRecord
     has_secure_password
-    
+    mount_uploader :image, ImageUploader
+
     ## Relações
     has_many :posts, dependent: :destroy
     has_many :like_posts, dependent: :destroy
@@ -14,7 +15,7 @@ class User < ApplicationRecord
     ## Validações
     validates :name, :email, :birthdate, :gender, :contact_phone, :nickname, presence: true
     validates :nickname, :email, uniqueness: true
-    validates :password, :password_confirmation, length: {minimum: 6}
+    validates :password, :password_confirmation, length: {minimum: 6}, on: :create
     validates :contact_phone, length: {is: 11}, numericality: {only_integer: true}
     validate :under_age?
     enum gender:{

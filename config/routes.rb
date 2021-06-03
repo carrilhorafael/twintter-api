@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   put 'posts/:id', to: "posts#update"
   delete 'posts/:id', to: "posts#destroy"
   
+  put 'users/add_photo', to: "users#add_photo"
   post 'users/follow', to: "users#follow"
   post 'users', to: "users#create"
   get 'users/:id', to: "users#show"

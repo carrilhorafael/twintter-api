@@ -21,6 +21,16 @@ class UsersController < ApplicationController
     render json: @user
   end
 
+  def add_photo
+    # current_user.image = params[:image]
+    # byebug
+    if current_user.update!(image: params[:image])
+      render json: current_user
+    else
+      render json: {error: "Não foi possivel modificar a imagem"}, status: 422
+    end
+    
+  end
   def update
     if @user.update(user_params)
       render json: @user
@@ -49,7 +59,7 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, 
-      :email, 
+      :email,
       :birthdate, 
       :gender, 
       :contact_phone, 

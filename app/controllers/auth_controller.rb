@@ -4,7 +4,7 @@ class AuthController < ApplicationController
     @user = User.find_by(email: params[:user][:email])
     if @user.authenticate(params[:user][:password])
       token = JsonWebToken.encode({user_id: @user.id})
-      render json: {token: token}
+      render json: {token: token, user: @user}
     else
       render json: {error: "Não foi possivel fazer o login"}, status: 401
     end
@@ -14,7 +14,7 @@ class AuthController < ApplicationController
   def signup
     @user = User.new(user_params)
     if @user.save
-      UserMailer.with(user: @user).confirm.deliver_now
+      # UserMailer.with(user: @user).confirm.deliver_now
       render json: @user, status: 201
     else
       render json: @user.errors, status: 422
